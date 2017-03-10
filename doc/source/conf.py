@@ -37,7 +37,7 @@ doxygen_dir = join(doc_root_dir, 'doxygen')
 __mkdir(doxygen_dir)
 my_doxygen_xml_dir = None
 
-def run_doxygen(folder):
+def __run_doxygen(folder):
     """Run the doxygen make command in the designated folder"""
 
     abs_folder = abspath(folder)
@@ -93,7 +93,7 @@ def __generate_doxygen_xml(app):
         print('>>>>> ddd BEFORE {} is doxygen_dir\n\t{}\n'.format(doxygen_dir, listdir(doxygen_dir)))
         __parse_doxyfile(join(doc_root_dir, 'Doxyfile.in'), doxyfile)
         print('>>>>> DDD AFTER {} is doxygen_dir\n\t{}\n'.format(doxygen_dir, listdir(doxygen_dir)))
-        run_doxygen(join('..'))
+        __run_doxygen(join('..'))
 
 
 def setup(app):
