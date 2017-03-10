@@ -27,8 +27,8 @@ def run_doxygen(folder):
     """Run the doxygen make command in the designated folder"""
 
     abs_folder = abspath(folder)
-    sys.stdout.write('folder: {}'.format(abs_folder))
-    sys.stderr.write('ERRORING folder: {}'.format(abs_folder))
+    sys.stdout.write('>>>>> STDOUT folder: {}\n'.format(abs_folder))
+    sys.stderr.write('>>>>> ERRORING folder: {}\n'.format(abs_folder))
 
 
 def generate_doxygen_xml(app):
