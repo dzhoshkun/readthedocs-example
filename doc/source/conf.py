@@ -24,6 +24,7 @@ import subprocess, sys
 from os.path import abspath, join
 from os import listdir, mkdir
 
+project_source_dir = abspath(join('..', '..', 'src'))
 my_doxygen_xml_dir = None
 
 def run_doxygen(folder):
@@ -43,6 +44,11 @@ def run_doxygen(folder):
     doxyfile_name = 'Doxyfile'
     with open(join(abs_folder, doxyfile_name + '.in'), 'r') as doxyfile:
         conf = doxyfile.read()
+
+    conf = conf.replace('@doxy_main_page@', ' ')
+    global project_source_dir
+    conf = conf.replace('@PROJECT_SOURCE_DIR@', project_source_dir)
+    conf = conf.replace('@PROJECT_BINARY_DIR@', ' ')
 
     sys.stdout.write('>>>>> doxygen folder BEFORE: {}\n\t{}\n'.format(doxygen_folder, listdir(doxygen_folder)))
     doxyfile_path = join(doxygen_folder, doxyfile_name)
