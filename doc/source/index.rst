@@ -23,3 +23,12 @@ Breathe stuff
 =============
 
 .. doxygenindex::
+
+.. doxygennamespace:: gg
+   :content-only:
+   :outline:
+   :members:
+   :protected-members:
+   :private-members:
+   :undoc-members:
+   :no-link:
