@@ -37,9 +37,21 @@ doxygen_dir = join(doc_root_dir, 'doxygen')
 __mkdir(doxygen_dir)
 my_doxygen_xml_dir = None
 
-def __run_doxygen(folder):
+def __run_doxygen(working_dir, doxyfile):
     """Run the doxygen make command in the designated folder"""
 
+    chdir(working_dir)
+
+    try:
+        ret = subprocess.call('ls -alh'.format(doxyfile), cwd=working_dir, shell=True)
+        if ret < 0:
+            sys.stderr.write('doxygen terminated by signal {}\n'.format(retcode))
+        else:
+            sys.stdout.write('doxygen succeeded with {}\n'.format(retcode))
+    except OSError as e:
+        sys.stderr.write('doxygen execution failed: {}'.format(e))
+
+    '''
     abs_folder = abspath(folder)
     sys.stdout.write('>>>>> pristine folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
 
@@ -67,6 +79,7 @@ def __run_doxygen(folder):
     print('>>>>> BEFORE {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
     my_doxygen_xml_dir = join(doxygen_folder, 'xml')
     print('>>>>> AFTER {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
+    '''
 
 
 def __parse_doxyfile(doxyfile_in, doxyfile):
@@ -93,7 +106,7 @@ def __generate_doxygen_xml(app):
         print('>>>>> ddd BEFORE {} is doxygen_dir\n\t{}\n'.format(doxygen_dir, listdir(doxygen_dir)))
         __parse_doxyfile(join(doc_root_dir, 'Doxyfile.in'), doxyfile)
         print('>>>>> DDD AFTER {} is doxygen_dir\n\t{}\n'.format(doxygen_dir, listdir(doxygen_dir)))
-        __run_doxygen(join('..'))
+        __run_doxygen(doxygen_dir, doxyfile)
 
 
 def setup(app):
