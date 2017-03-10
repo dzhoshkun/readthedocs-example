@@ -55,16 +55,6 @@ def run_doxygen(folder):
     my_doxygen_xml_dir = join(doxygen_folder, 'xml')
     print('>>>>> AFTER {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
 
-    try:
-        retcode = subprocess.call('cmake --version', shell=True)
-        if retcode < 0:
-            sys.stderr.write('>>>>> No cmake? ({})\n'.format(-retcode))
-        else:
-            sys.stderr.write('>>>>> Yes cmake? ({})\n'.format(-retcode))
-
-    except OSError as e:
-        sys.stderr.write('doxygen execution failed: %s' % e)
-
 
 def generate_doxygen_xml(app):
     """Run the doxygen make commands if we're on the ReadTheDocs server"""
