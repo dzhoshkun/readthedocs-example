@@ -32,7 +32,7 @@ def __mkdir(path):
         pass  # directory exists, just carry on
 
 project_source_dir = abspath(join('..', '..', 'src'))
-doc_root_dir = abspath('.')
+doc_root_dir = abspath('..')
 doxygen_dir = join(doc_root_dir, 'doxygen')
 __mkdir(doxygen_dir)
 my_doxygen_xml_dir = None
