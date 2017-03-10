@@ -50,7 +50,7 @@ def run_doxygen(folder):
         doxyfile.write(conf)
     sys.stdout.write('>>>>> doxygen folder AFTER: {}\n\t{}\n'.format(doxygen_folder, listdir(doxygen_folder)))
 
-
+    global my_doxygen_xml_dir
     print('>>>>> BEFORE {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
     my_doxygen_xml_dir = join(doxygen_folder, 'xml')
     print('>>>>> AFTER {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
