@@ -24,7 +24,7 @@ Breathe stuff
 
 .. doxygenindex::
 
-.. doxygennamespace:: mc
+.. doxygennamespace:: gg
    :content-only:
    :outline:
    :members:
