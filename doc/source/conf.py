@@ -31,11 +31,26 @@ def __mkdir(path):
     except OSError:
         pass  # directory exists, just carry on
 
+
+'''
+documentation root path: /home/me/docproj/
+breathe path: /home/me/docproj/ext/breathe/
+doxygen xml output: /home/me/docproj/doxyxml/
+'''
+
 project_source_dir = abspath(join('..', '..', 'src'))
 doc_root_dir = abspath('..')
 doxygen_dir = join(doc_root_dir, 'doxygen')
 __mkdir(doxygen_dir)
+breathe_dir = join(doc_root_dir, 'breathe')
+__mkdir(breathe_dir)
 doxygen_xml_dir = join(doxygen_dir, 'xml')
+
+sys.path.append( breathe_dir )
+breathe_projects = { "rtd-example-breathe": doxygen_xml_dir }
+breathe_default_project = "rtd-example-breathe"
+
+
 my_doxygen_xml_dir = None
 
 def __run_doxygen(working_dir, doxyfile):
@@ -99,7 +114,7 @@ print('>>>>> {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc']
+extensions = ['sphinx.ext.autodoc', 'breathe']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

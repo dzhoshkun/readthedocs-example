@@ -18,3 +18,13 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Breathe stuff
+=============
+
+.. doxygenindex::
+.. doxygenfunction::
+.. doxygenstruct::
+.. doxygenenum::
+.. doxygentypedef::
+.. doxygenclass::
