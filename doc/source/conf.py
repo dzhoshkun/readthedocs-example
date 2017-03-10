@@ -40,8 +40,6 @@ my_doxygen_xml_dir = None
 def __run_doxygen(working_dir, doxyfile):
     """Run the doxygen make command in the designated folder"""
 
-    chdir(working_dir)
-
     try:
         ret = subprocess.call('ls -alh'.format(doxyfile), cwd=working_dir, shell=True)
         if ret < 0:
