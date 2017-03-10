@@ -24,6 +24,13 @@ import subprocess, sys
 from os.path import abspath, join
 from os import listdir, mkdir
 
+
+def __mkdir(path):
+    try:
+        mkdir(path)
+    except OSError:
+        pass  # directory exists, just carry on
+
 project_source_dir = abspath(join('..', '..', 'src'))
 my_doxygen_xml_dir = None
 
@@ -34,10 +41,7 @@ def run_doxygen(folder):
     sys.stdout.write('>>>>> pristine folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
 
     doxygen_folder = join(abs_folder, 'doxygen')
-    try:
-        mkdir(doxygen_folder)
-    except OSError:
-        pass  # directory exists, just carry on
+    __mkdir(doxygen_folder)
 
     sys.stdout.write('>>>>> doxy\'ed folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
 
