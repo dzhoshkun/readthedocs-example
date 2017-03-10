@@ -90,9 +90,9 @@ def __generate_doxygen_xml(app):
     if read_the_docs_build:
         global doc_root_dir, doxygen_dir
         doxyfile = join(doxygen_dir, 'Doxyfile')
-        print('>>>>> ddd BEFORE {} is doxygen_dir\n'.format(doxygen_dir))
+        print('>>>>> ddd BEFORE {} is doxygen_dir\n\t{}\n'.format(doxygen_dir, listdir(doxygen_dir)))
         __parse_doxyfile(join(doc_root_dir, 'Doxyfile.in'), doxyfile)
-        print('>>>>> DDD AFTER {} is doxygen_dir\n'.format(doxygen_dir))
+        print('>>>>> DDD AFTER {} is doxygen_dir\n\t{}\n'.format(doxygen_dir, listdir(doxygen_dir)))
         run_doxygen(join('..'))
 
 
