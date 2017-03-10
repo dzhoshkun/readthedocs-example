@@ -23,8 +23,3 @@ Breathe stuff
 =============
 
 .. doxygenindex::
-.. doxygenfunction::
-.. doxygenstruct::
-.. doxygenenum::
-.. doxygentypedef::
-.. doxygenclass::
