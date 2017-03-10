@@ -35,6 +35,7 @@ project_source_dir = abspath(join('..', '..', 'src'))
 doc_root_dir = abspath('..')
 doxygen_dir = join(doc_root_dir, 'doxygen')
 __mkdir(doxygen_dir)
+doxygen_xml_dir = join(doxygen_dir, 'xml')
 my_doxygen_xml_dir = None
 
 def __run_doxygen(working_dir, doxyfile):
@@ -73,6 +74,13 @@ def __generate_doxygen_xml(app):
         __parse_doxyfile(join(doc_root_dir, 'Doxyfile.in'), doxyfile)
         print('>>>>> DDD AFTER {} is doxygen_dir\n\t{}\n'.format(doxygen_dir, listdir(doxygen_dir)))
         __run_doxygen(doxygen_dir, doxyfile)
+        try:
+            ret = subprocess.call('ls -alh', cwd=doxygen_xml_dir, shell=True)
+            if ret != 0:
+                sys.stderr.write('cannot list {} with error {}\n'.format(doxygen_xml_dir, ret))
+        except OSError as e:
+            sys.stderr.write('listing of {} failed: {}'.format(doxygen_xml_dir, e))
+
 
 
 def setup(app):
