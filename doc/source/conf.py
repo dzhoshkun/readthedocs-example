@@ -78,7 +78,7 @@ def __parse_doxyfile(doxyfile_in, doxyfile):
     conf = conf.replace('@PROJECT_SOURCE_DIR@', project_source_dir)
     conf = conf.replace('@PROJECT_BINARY_DIR@', ' ')
 
-    doxyfile_path = join(doxygen_folder, doxyfile_name)
+    doxyfile_path = join(doxygen_dir, doxyfile_name)
     with open(doxyfile, 'w') as _doxyfile:
         _doxyfile.write(conf)
 
