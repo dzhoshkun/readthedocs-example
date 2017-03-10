@@ -41,11 +41,12 @@ def __run_doxygen(working_dir, doxyfile):
     """Run the doxygen make command in the designated folder"""
 
     try:
-        ret = subprocess.call('ls -alh'.format(doxyfile), cwd=working_dir, shell=True)
+        ret = subprocess.call('doxygen {}'.format(doxyfile), cwd=working_dir, shell=True)
         if ret < 0:
             sys.stderr.write('doxygen terminated by signal {}\n'.format(ret))
-        else:
-            sys.stdout.write('doxygen succeeded with {}\n'.format(ret))
+        ret = subprocess.call('ls -alh', cwd=working_dir, shell=True)
+        if ret != 0:
+            sys.stderr.write('can\'t list contents ({})\n'.format(ret))
     except OSError as e:
         sys.stderr.write('doxygen execution failed: {}'.format(e))
 
