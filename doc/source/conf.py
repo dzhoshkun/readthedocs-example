@@ -21,7 +21,7 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 import subprocess, sys
-from os.path import abspath
+from os.path import abspath, join
 from os import listdir, mkdir
 
 def run_doxygen(folder):
