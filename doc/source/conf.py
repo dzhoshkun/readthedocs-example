@@ -31,7 +31,11 @@ def run_doxygen(folder):
     sys.stdout.write('>>>>> pristine folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
 
     doxygen_folder = join(abs_folder, 'doxygen')
-    mkdir(doxygen_folder)
+    try:
+        mkdir(doxygen_folder)
+    except OSError:
+        pass  # directory exists, just carry on
+
     sys.stdout.write('>>>>> doxy\'ed folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
 
     try:
