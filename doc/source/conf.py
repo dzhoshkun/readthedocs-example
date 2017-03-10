@@ -21,16 +21,14 @@
 # sys.path.insert(0, os.path.abspath('.'))
 
 import subprocess, sys
+from os.path import abspath
 
 def run_doxygen(folder):
     """Run the doxygen make command in the designated folder"""
 
-    try:
-        retcode = subprocess.call("cd %s; make" % folder, shell=True)
-        if retcode < 0:
-            sys.stderr.write("doxygen terminated by signal %s" % (-retcode))
-    except OSError as e:
-        sys.stderr.write("doxygen execution failed: %s" % e)
+    abs_folder = abspath(folder)
+    sys.stdout.write('folder: {}'.format(abs_folder))
+    sys.stderr.write('ERRORING folder: {}'.format(abs_folder))
 
 
 def generate_doxygen_xml(app):
