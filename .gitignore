@@ -30,3 +30,6 @@
 
 # Qt Creator user files
 *.user
+
+# Doc build directory
+doc/build
