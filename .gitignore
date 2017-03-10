@@ -31,5 +31,6 @@
 # Qt Creator user files
 *.user
 
-# Doc build directory
+# Generated directories
 doc/build
+doc/doxygen
