@@ -42,43 +42,10 @@ def __run_doxygen(working_dir, doxyfile):
 
     try:
         ret = subprocess.call('doxygen {}'.format(doxyfile), cwd=working_dir, shell=True)
-        if ret < 0:
-            sys.stderr.write('doxygen terminated by signal {}\n'.format(ret))
-        ret = subprocess.call('ls -alh', cwd=working_dir, shell=True)
         if ret != 0:
-            sys.stderr.write('can\'t list contents ({})\n'.format(ret))
+            sys.stderr.write('doxygen terminated by signal {}\n'.format(ret))
     except OSError as e:
         sys.stderr.write('doxygen execution failed: {}'.format(e))
-
-    '''
-    abs_folder = abspath(folder)
-    sys.stdout.write('>>>>> pristine folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
-
-    doxygen_folder = join(abs_folder, 'doxygen')
-    __mkdir(doxygen_folder)
-
-    sys.stdout.write('>>>>> doxy\'ed folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
-
-    doxyfile_name = 'Doxyfile'
-    with open(join(abs_folder, doxyfile_name + '.in'), 'r') as doxyfile:
-        conf = doxyfile.read()
-
-    conf = conf.replace('@doxy_main_page@', ' ')
-    global project_source_dir
-    conf = conf.replace('@PROJECT_SOURCE_DIR@', project_source_dir)
-    conf = conf.replace('@PROJECT_BINARY_DIR@', ' ')
-
-    sys.stdout.write('>>>>> doxygen folder BEFORE: {}\n\t{}\n'.format(doxygen_folder, listdir(doxygen_folder)))
-    doxyfile_path = join(doxygen_folder, doxyfile_name)
-    with open(doxyfile_path, 'w') as doxyfile:
-        doxyfile.write(conf)
-    sys.stdout.write('>>>>> doxygen folder AFTER: {}\n\t{}\n'.format(doxygen_folder, listdir(doxygen_folder)))
-
-    global my_doxygen_xml_dir
-    print('>>>>> BEFORE {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
-    my_doxygen_xml_dir = join(doxygen_folder, 'xml')
-    print('>>>>> AFTER {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
-    '''
 
 
 def __parse_doxyfile(doxyfile_in, doxyfile):
