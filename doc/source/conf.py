@@ -43,9 +43,9 @@ def __run_doxygen(working_dir, doxyfile):
     try:
         ret = subprocess.call('ls -alh'.format(doxyfile), cwd=working_dir, shell=True)
         if ret < 0:
-            sys.stderr.write('doxygen terminated by signal {}\n'.format(retcode))
+            sys.stderr.write('doxygen terminated by signal {}\n'.format(ret))
         else:
-            sys.stdout.write('doxygen succeeded with {}\n'.format(retcode))
+            sys.stdout.write('doxygen succeeded with {}\n'.format(ret))
     except OSError as e:
         sys.stderr.write('doxygen execution failed: {}'.format(e))
 
