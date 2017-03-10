@@ -38,6 +38,17 @@ def run_doxygen(folder):
 
     sys.stdout.write('>>>>> doxy\'ed folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
 
+    doxyfile_name = 'Doxyfile'
+    with open(join(abs_folder, doxyfile_name + '.in'), 'r') as doxyfile:
+        conf = doxyfile.read()
+
+    sys.stdout.write('>>>>> doxygen folder BEFORE: {}\n\t{}\n'.format(doxygen_folder, listdir(doxygen_folder)))
+    doxyfile_path = join(doxygen_folder, doxyfile_name)
+    with open(doxyfile_path, 'w') as doxyfile:
+        doxyfile.write(conf)
+    sys.stdout.write('>>>>> doxygen folder AFTER: {}\n\t{}\n'.format(doxygen_folder, listdir(doxygen_folder)))
+
+
     try:
         retcode = subprocess.call('cmake --version', shell=True)
         if retcode < 0:
