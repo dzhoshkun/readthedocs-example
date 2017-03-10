@@ -66,7 +66,7 @@ def run_doxygen(folder):
     print('>>>>> AFTER {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
 
 
-def generate_doxygen_xml(app):
+def __generate_doxygen_xml(app):
     """Run the doxygen make commands if we're on the ReadTheDocs server"""
 
     read_the_docs_build = os.environ.get('READTHEDOCS', None) == 'True'
@@ -79,7 +79,7 @@ def generate_doxygen_xml(app):
 def setup(app):
 
     # Add hook for building doxygen xml when needed
-    app.connect("builder-inited", generate_doxygen_xml)
+    app.connect("builder-inited", __generate_doxygen_xml)
 
 print('>>>>> {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
 
