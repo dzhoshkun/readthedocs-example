@@ -24,6 +24,8 @@ import subprocess, sys
 from os.path import abspath, join
 from os import listdir, mkdir
 
+my_doxygen_xml_dir = None
+
 def run_doxygen(folder):
     """Run the doxygen make command in the designated folder"""
 
@@ -48,6 +50,10 @@ def run_doxygen(folder):
         doxyfile.write(conf)
     sys.stdout.write('>>>>> doxygen folder AFTER: {}\n\t{}\n'.format(doxygen_folder, listdir(doxygen_folder)))
 
+
+    print('>>>>> BEFORE {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
+    my_doxygen_xml_dir = join(doxygen_folder, 'xml')
+    print('>>>>> AFTER {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
 
     try:
         retcode = subprocess.call('cmake --version', shell=True)
@@ -75,6 +81,7 @@ def setup(app):
     # Add hook for building doxygen xml when needed
     app.connect("builder-inited", generate_doxygen_xml)
 
+print('>>>>> {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
 
 # -- General configuration ------------------------------------------------
 
