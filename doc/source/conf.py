@@ -22,20 +22,24 @@
 
 import subprocess, sys
 from os.path import abspath
+from os import listdir, mkdir
 
 def run_doxygen(folder):
     """Run the doxygen make command in the designated folder"""
 
     abs_folder = abspath(folder)
-    sys.stdout.write('>>>>> STDOUT folder: {}\n'.format(abs_folder))
-    sys.stderr.write('>>>>> ERRORING folder: {}\n'.format(abs_folder))
+    sys.stdout.write('>>>>> pristine folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
+
+    doxygen_folder = join(abs_folder, 'doxygen')
+    mkdir(doxygen_folder)
+    sys.stdout.write('>>>>> doxy\'ed folder: {}\n\t{}\n'.format(abs_folder, listdir(abs_folder)))
 
     try:
         retcode = subprocess.call('cmake --version', shell=True)
         if retcode < 0:
-            sys.stderr.write('>>>>> No cmake? ({})'.format(-retcode))
+            sys.stderr.write('>>>>> No cmake? ({})\n'.format(-retcode))
         else:
-            sys.stderr.write('>>>>> Yes cmake? ({})'.format(-retcode))
+            sys.stderr.write('>>>>> Yes cmake? ({})\n'.format(-retcode))
 
     except OSError as e:
         sys.stderr.write('doxygen execution failed: %s' % e)
@@ -48,9 +52,7 @@ def generate_doxygen_xml(app):
 
     if read_the_docs_build:
 
-        run_doxygen("../../examples/doxygen")
-        run_doxygen("../../examples/specific")
-        run_doxygen("../../examples/tinyxml")
+        run_doxygen(join('..'))
 
 
 def setup(app):
