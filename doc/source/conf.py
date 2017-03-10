@@ -23,7 +23,9 @@
 import subprocess, sys
 from os.path import abspath, join
 from os import listdir, mkdir
+import pip
 
+pip.main(['install', 'breathe'])
 
 def __mkdir(path):
     try:
