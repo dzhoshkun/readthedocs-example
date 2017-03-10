@@ -32,6 +32,9 @@ def __mkdir(path):
         pass  # directory exists, just carry on
 
 project_source_dir = abspath(join('..', '..', 'src'))
+doc_root_dir = abspath('.')
+doxygen_dir = join(doc_root_dir, 'doxygen')
+__mkdir(doxygen_dir)
 my_doxygen_xml_dir = None
 
 def run_doxygen(folder):
@@ -66,13 +69,31 @@ def run_doxygen(folder):
     print('>>>>> AFTER {} is my_doxygen_xml_dir\n'.format(my_doxygen_xml_dir))
 
 
+def __parse_doxyfile(doxyfile_in, doxyfile):
+    with open(doxyfile_in, 'r') as _doxyfile_in:
+        conf = _doxyfile_in.read()
+
+    conf = conf.replace('@doxy_main_page@', ' ')
+    global project_source_dir
+    conf = conf.replace('@PROJECT_SOURCE_DIR@', project_source_dir)
+    conf = conf.replace('@PROJECT_BINARY_DIR@', ' ')
+
+    doxyfile_path = join(doxygen_folder, doxyfile_name)
+    with open(doxyfile, 'w') as _doxyfile:
+        _doxyfile.write(conf)
+
+
 def __generate_doxygen_xml(app):
     """Run the doxygen make commands if we're on the ReadTheDocs server"""
 
     read_the_docs_build = os.environ.get('READTHEDOCS', None) == 'True'
 
     if read_the_docs_build:
-
+        global doc_root_dir, doxygen_dir
+        doxyfile = join(doxygen_dir, 'Doxyfile')
+        print('>>>>> ddd BEFORE {} is doxygen_dir\n'.format(doxygen_dir))
+        __parse_doxyfile(join(doc_root_dir, 'Doxyfile.in'), doxyfile)
+        print('>>>>> DDD AFTER {} is doxygen_dir\n'.format(doxygen_dir))
         run_doxygen(join('..'))
 
 
